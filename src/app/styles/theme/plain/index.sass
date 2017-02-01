@@ -1,0 +1,47 @@
+section.lyt-plain
+  // Layout style
+  >.wrapper
+    position: relative
+    &.fullscreen
+      min-width: 100vw
+      min-height: 100vh
+    &.vertical
+      display: table
+      > .wrapper-inner
+        display: table-cell
+        vertical-align: middle
+      &.center
+        text-align: center
+
+  // Component style
+  .space
+    margin: 15px 0px
+    &.lg
+      margin: 50px 0px
+    &.md
+      margin: 35px 0px
+    &.sm
+      margin: 20px 0px
+
+  .logo
+    display: inline-block
+    text-align: left
+    img
+      height: 60px
+    span.subtext
+      display: block
+      font-weight: bold
+      margin-top: -17px
+      margin-left: -3px
+
+  .form
+    background: #fff
+    padding: 15px
+
+  .copyright
+    position: absolute
+    left: 0px
+    right: 0px
+    bottom: 0px
+    p
+      font-size: 0.65rem
