@@ -7,8 +7,9 @@ var PATH = {
 module.exports = {
   entry: PATH.app + '/index.js',
   output: {
-    path: PATH.assets + '/js',
-    filename: 'bundle.min.js'
+    path: path.resolve(__dirname, 'dist') + '/app',
+    filename: 'bundle.min.js',
+    publicPath: '/app/'
   },
   module: {
     loaders: [{

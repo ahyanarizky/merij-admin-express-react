@@ -5,7 +5,7 @@
   "main": "src/app/index.js",
   "scripts": {
     "start": "npm run build",
-    "build": "webpack -d -p && webpack-dev-server --content-base src/ --inline --hot --port 1234 --history-api-fallback"
+    "build": "webpack -d && webpack-dev-server --content-base src/ --inline --hot --port 1234 --history-api-fallback"
   },
   "repository": {
     "type": "git",
