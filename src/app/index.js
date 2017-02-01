@@ -3,6 +3,7 @@ import { browserHistory, Link, Route, Router } from 'react-router'
 import ReactDOM from 'react-dom'
 import Signin from './modules/signin'
 import Notfound from './modules/notfound'
+import './styles/core/index.sass'
 
 class App extends Component {
   render() {
