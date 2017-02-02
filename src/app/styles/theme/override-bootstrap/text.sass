@@ -1,2 +1,10 @@
 a
+  color: $link-color
+  cursor: pointer
   outline: none !important
+  &:hover, &:focus
+    color: $link-color-active
+  &[disabled]
+    color: $link-color
+    cursor: not-allowed
+    text-decoration: none

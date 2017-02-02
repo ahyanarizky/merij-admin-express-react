@@ -3,6 +3,7 @@ import { browserHistory, Link, Route, Router } from 'react-router'
 import ReactDOM from 'react-dom'
 import LayoutPlain from './layouts/plain'
 import Signin from './modules/signin'
+import ForgotPassword from './modules/forgotpassword'
 import Notfound from './modules/notfound'
 import './styles/core/index.sass'
 
@@ -12,6 +13,7 @@ class App extends Component {
       <Router history={browserHistory}>
         <Route component={LayoutPlain}>
           <Route path={'/'} component={Signin} />
+          <Route path={'/forgotpassword'} component={ForgotPassword} />
           <Route path={'*'} component={Notfound} />
         </Route>
       </Router>
