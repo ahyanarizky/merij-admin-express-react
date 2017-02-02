@@ -67,7 +67,7 @@ export default class Signin extends Component {
     let errorType =  'alert '
     errorType += this.state.errorTypeWarning ? 'alert-warning' : 'alert-danger'
     let errorFeedback = !this.state.errorFeedback ? null : (
-      <Alert className={errorType} title={this.state.errorFeedback.title} text={this.state.errorFeedback.text} />
+      <Alert dismiss={false} className={errorType} title={this.state.errorFeedback.title} text={this.state.errorFeedback.text} />
     )
 
     let disabled = !this.state.isProcess ? null : 'disabled'
