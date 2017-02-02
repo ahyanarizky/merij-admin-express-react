@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import Alert from '../../components/alert'
 
 export default class Signin extends Component {
   constructor(props) {
@@ -21,17 +22,26 @@ export default class Signin extends Component {
 
     if(!email) {
       this.setState({
-        errorFeedback: 'Opps, Email must be filled',
+        errorFeedback: {
+          'title': 'Opps..',
+          'text': 'Email must be filled'
+        },
         errorTypeWarning: true
       })
     } else if(!password) {
       this.setState({
-        errorFeedback: 'Opps, password must be filled',
+        errorFeedback: {
+          'title': 'Opps..',
+          'text': 'Password must be filled'
+        },
         errorTypeWarning: true
       })
     } else if(email != 'admin@merij.co' || password != 'merij') {
       this.setState({
-        errorFeedback: 'Sorry, we couldn\'t find an account with that username and password',
+        errorFeedback: {
+          'title': 'Oh no!',
+          'text': 'Sorry, we couldn\'t find an account with that username and password'
+        },
         errorTypeWarning: false
       })
     } else {
@@ -57,7 +67,7 @@ export default class Signin extends Component {
     let errorType =  'alert '
     errorType += this.state.errorTypeWarning ? 'alert-warning' : 'alert-danger'
     let errorFeedback = !this.state.errorFeedback ? null : (
-      <div className={errorType} role="alert">{this.state.errorFeedback}</div>
+      <Alert className={errorType} title={this.state.errorFeedback.title} text={this.state.errorFeedback.text} />
     )
 
     let disabled = !this.state.isProcess ? null : 'disabled'

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import Alert from '../../components/alert'
 
 export default class ForgotPassword extends Component {
   constructor(props) {
@@ -20,7 +21,10 @@ export default class ForgotPassword extends Component {
     setTimeout(() => {
       this.setState({
         errorFeedback: null,
-        successFeedback: 'We sent you an email with instructions on how to reset your password',
+        successFeedback: {
+          'title': 'You\'ve got new mail!',
+          'text': 'We sent you an email with instructions on how to reset your password'
+        },
         sentMailCount: this.state.sentMailCount + 1,
         isProcess: true,
         isSent: true
@@ -37,12 +41,18 @@ export default class ForgotPassword extends Component {
 
       if(!email) {
         this.setState({
-          errorFeedback: 'Opps, Email must be filled',
+          errorFeedback: {
+            'title': 'Opps..',
+            'text': 'Email must be filled'
+          },
           errorTypeWarning: true
         })
       } else if(email != 'admin@merij.co') {
         this.setState({
-          errorFeedback: 'Sorry, we couldn\'t find an account with that username',
+          errorFeedback: {
+            'title': 'Oh no!',
+            'text': 'Sorry, we couldn\'t find an account with that username'
+          },
           errorTypeWarning: false
         })
       } else {
@@ -85,15 +95,18 @@ export default class ForgotPassword extends Component {
     let errorType =  'alert '
     errorType += this.state.errorTypeWarning ? 'alert-warning' : 'alert-danger'
     let errorFeedback = !this.state.errorFeedback ? null : (
-      <div className={errorType} role="alert">{this.state.errorFeedback}</div>
+      <Alert className={errorType} title={this.state.errorFeedback.title} text={this.state.errorFeedback.text} />
     )
 
     let tryAgainDisabled = !this.state.isTryAgain ? null : 'disabled'
     let successFeedback = !this.state.successFeedback ? null : (
-      <div className="alert alert-info text-left" role="alert">
-        <p><strong>You've got new mail! { this.state.sentMailCount > 1 ? '(' + this.state.sentMailCount +')' : null }</strong></p>
-        <p>{this.state.successFeedback}. If you have not received yet, please click <a onClick={this.handleTryAgain.bind(this)} disabled={tryAgainDisabled}><strong>Try again</strong></a></p>
-      </div>
+      <Alert className="alert alert-info"
+        title={(
+          <span>{this.state.successFeedback.title} {this.state.sentMailCount > 1 ? '(' + this.state.sentMailCount +')' : null}</span>
+        )}
+        text={(
+          <span>{this.state.successFeedback.text}. If you have not received yet, please click <a onClick={this.handleTryAgain.bind(this)} disabled={tryAgainDisabled}><strong>try again</strong></a></span>
+        )} />
     )
 
     let disabled = !this.state.isProcess ? null : 'disabled'
