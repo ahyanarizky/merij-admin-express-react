@@ -1,3 +1,10 @@
+##### App environment #####
+
+# Distribution folder
+dist
+
+###########################
+
 # Logs
 logs
 *.log
