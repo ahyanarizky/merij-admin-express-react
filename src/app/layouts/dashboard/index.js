@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
     menuMobileClass += this.state.isMenuMobileOpen ? ' is-open' : ''
 
     let contentClass = 'content-wrapper'
-    contentClass += !this.state.isMenuClose ? '' : ' is-close'
+    contentClass += !this.state.isMenuClose ? '' : ' is-expand'
 
     return (
       <section className="lyt-dashboard">

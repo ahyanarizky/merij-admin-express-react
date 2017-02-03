@@ -140,18 +140,22 @@ section.lyt-dashboard
     margin-left: $lyt-dashboard-menu-width
     position: relative
     +transition(margin linear 0.1s)
-    .breadcrumb, .datatable > .header
-      left: $lyt-dashboard-menu-width
-    &.is-close
-      margin-left: 0
+    +bp-medium
+      margin-left: 0px !important
       .breadcrumb, .datatable > .header
-        left: 0
+        left: 0px !important
+        width: 100% !important
+    &.is-expand
+      margin-left: 0px
+      .breadcrumb, .datatable > .header
+        left: 0px
         width: 100%
 
     // Component style
     .breadcrumb, .datatable > .header
       position: fixed
       top: $lyt-dashboard-header-height
+      left: $lyt-dashboard-menu-width
       z-index: 1
       +calc(width, ('100% - ' + $lyt-dashboard-menu-width))
       +transition(left linear 0.1s, width linear 0.1s)
