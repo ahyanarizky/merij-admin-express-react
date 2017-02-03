@@ -46,6 +46,10 @@ export default class Menu extends Component {
         name: 'Channels',
         link: 'channels'
       }, {
+        icon: 'fa-newspaper-o',
+        name: 'Posts',
+        link: 'posts'
+      }, {
         icon: 'fa-user-o',
         name: 'Users',
         link: 'users'

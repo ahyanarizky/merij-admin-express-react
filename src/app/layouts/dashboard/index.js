@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from './header'
 import Menu from './menu'
 import Copyright from './copyright'
-import '../../styles/theme/dashboard/index.sass'
+import '../../styles/theme/layouts/dashboard/index.sass'
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -31,6 +31,9 @@ export default class Dashboard extends Component {
     let menuMobileClass = 'menu-wrapper is-mobile'
     menuMobileClass += this.state.isMenuMobileOpen ? ' is-open' : ''
 
+    let contentClass = 'content-wrapper'
+    contentClass += !this.state.isMenuClose ? '' : ' is-close'
+
     return (
       <section className="lyt-dashboard">
         <div className="header-wrapper">
@@ -45,7 +48,7 @@ export default class Dashboard extends Component {
         <div className={menuMobileClass}>
           <Menu activePage={activePage} handleForceMenuClose={this.hanleMenuMobileToggle.bind(this)} />
         </div>
-        <div className="content-wrapper">
+        <div className={contentClass}>
           { this.props.children }
         </div>
         <div className="copyright-wrapper">

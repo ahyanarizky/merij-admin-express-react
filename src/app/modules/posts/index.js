@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import Breadcrumb from '../../components/breadcrumb'
+import List from './list'
 
 export default class Posts extends Component {
   constructor(props) {
@@ -8,7 +10,10 @@ export default class Posts extends Component {
 
   render() {
     return (
-      <h3>Welcome Posts Page</h3>
+      <div>
+        <Breadcrumb />
+        <List />
+      </div>
     )
   }
 }

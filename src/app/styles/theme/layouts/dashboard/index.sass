@@ -1,4 +1,4 @@
-@import ../config
+@import ../../config
 
 section.lyt-dashboard
   display: flex
@@ -12,7 +12,7 @@ section.lyt-dashboard
     padding-right: 10px
     position: fixed
     top: 0px
-    width: 100vw
+    width: 100%
     height: $lyt-dashboard-header-height
     z-index: 100
     > .wrapper
@@ -73,12 +73,16 @@ section.lyt-dashboard
   > .menu-wrapper
     // Layout style
     background: $lyt-dashboard-menu-bg
-    padding-top: $lyt-dashboard-header-height
-    height: 100vh
+    border-right: $lyt-dashboard-border
+    margin-top: $lyt-dashboard-header-height
+    overflow-y: scroll
+    z-index: 100
+    +calc(height, ('100vh - ' + $lyt-dashboard-header-height))
     &:not(.is-mobile)
-      border-right: $lyt-dashboard-border
+      position: fixed
+      left: 0px
       width: $lyt-dashboard-menu-width
-      +transition(margin linear 0.2s)
+      +transition(margin linear 0.1s)
       &.is-close
         margin-left: -$lyt-dashboard-menu-width
     &.is-mobile
@@ -119,20 +123,45 @@ section.lyt-dashboard
             right: 5px
             width: 10px
             height: 10px
-            +transition(all ease-in 0.2s)
+            +transition(opacity ease-in 0.1s, right ease-in 0.1s)
           &.active:after, &:hover:after, &:focus:after
             opacity: 1
             right: 10px
           .icon
             text-align: center
-            width: 20px
+            width: 24px
             + .text
               margin-left: 10px
 
   > .content-wrapper
     // Layout style
     flex: 1
-    padding-top: $lyt-dashboard-header-height
+    margin-top: $lyt-dashboard-header-height
+    margin-left: $lyt-dashboard-menu-width
+    position: relative
+    +transition(margin linear 0.1s)
+    .breadcrumb, .datatable > .header
+      left: $lyt-dashboard-menu-width
+    &.is-close
+      margin-left: 0
+      .breadcrumb, .datatable > .header
+        left: 0
+        width: 100%
+
+    // Component style
+    .breadcrumb, .datatable > .header
+      position: fixed
+      top: $lyt-dashboard-header-height
+      z-index: 1
+      +calc(width, ('100% - ' + $lyt-dashboard-menu-width))
+      +transition(left linear 0.1s, width linear 0.1s)
+
+    .breadcrumb
+      + .datatable
+        > .header
+          +calc(top, ($lyt-dashboard-header-height + ' + ' + $breadcrumb-height))
+        > .content
+          +calc(padding-top, ($datatable-header-height + ' + ' + $breadcrumb-height))
 
   > .copyright-wrapper
     // Layout style

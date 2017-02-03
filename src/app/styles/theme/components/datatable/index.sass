@@ -1,0 +1,24 @@
+@import ../../config
+
+.datatable
+  display: flex
+  flex-direction: column
+  position: relative
+  width: 100%
+  height: 100%
+
+  > .header
+    align-items: center
+    background: $datatable-header-bg
+    border-bottom: $datatable-header-border
+    display: flex
+    padding: $datatable-header-padding
+    position: fixed
+    top: 0px
+    left: 0px
+    width: 100%
+    height: $datatable-header-height
+
+  > .content
+    flex: 1
+    padding-top: $datatable-header-height

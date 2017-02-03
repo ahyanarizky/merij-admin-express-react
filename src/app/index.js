@@ -9,6 +9,7 @@ import Dashboard from './modules/dashboard'
 import Ads from './modules/ads'
 import Officers from './modules/officers'
 import Channels from './modules/channels'
+import Posts from './modules/posts'
 import Users from './modules/users'
 import Profile from './modules/profile'
 import Notfound from './modules/notfound'
@@ -23,6 +24,7 @@ class App extends Component {
           <Route path={'/dashboard/ads'} title='ads' component={Ads} />
           <Route path={'/dashboard/officers'} title='officers' component={Officers} />
           <Route path={'/dashboard/channels'} title='channels' component={Channels} />
+          <Route path={'/dashboard/posts'} title='posts' component={Posts} />
           <Route path={'/dashboard/users'} title='users' component={Users} />
           <Route path={'/dashboard/profile'} title='profile' component={Profile} />
           <Route path={'*'} title='404 Not found' component={Notfound} />
