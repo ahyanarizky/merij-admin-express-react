@@ -1,6 +1,8 @@
+@import ../config
+
 section.lyt-plain
   // Layout style
-  >.wrapper
+  > .wrapper
     position: relative
     &.fullscreen
       min-width: 100vw
@@ -29,13 +31,14 @@ section.lyt-plain
     img
       height: 60px
     span.subtext
+      color: $logo-subtext
       display: block
       font-weight: bold
       margin-top: -17px
       margin-left: -3px
 
   .form
-    background: #fff
+    background: $form-bg
     padding: 15px
 
   .copyright

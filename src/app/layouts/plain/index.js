@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../styles/theme/plain/index.sass'
+import '../../styles/theme/plain/index.sass'
 
 export default class Plain extends Component {
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 import Alert from '../../components/alert'
 
 export default class Signin extends Component {
@@ -49,6 +49,10 @@ export default class Signin extends Component {
         isPasswordShow: false,
         isProcess: true
       })
+
+      setTimeout(() => {
+        browserHistory.push('/dashboard/welcome')
+      }, 1000)
     }
   }
 
