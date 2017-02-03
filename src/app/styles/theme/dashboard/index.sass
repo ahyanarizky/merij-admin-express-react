@@ -8,8 +8,8 @@ section.lyt-dashboard
     // Layout style
     background: $lyt-dashboard-header-bg
     border-bottom: $lyt-dashboard-border
-    padding-left: 15px
-    padding-right: 15px
+    padding-left: 10px
+    padding-right: 10px
     position: fixed
     top: 0px
     width: 100vw
@@ -65,7 +65,7 @@ section.lyt-dashboard
       &.is-mobile
         display: none
       +bp-medium
-        &:not(.is-mobile)
+        &.hide-mobile
           display: none
         &.is-mobile
           display: inline-flex

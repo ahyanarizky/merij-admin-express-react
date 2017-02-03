@@ -18,7 +18,7 @@ export default class Header extends Component {
     return (
       <div className="wrapper">
         <div className="wrapper-item text-left">
-          <Link className="button text" onClick={this.handleMenuToggle.bind(this)}>
+          <Link className="button text hide-mobile" onClick={this.handleMenuToggle.bind(this)}>
             <i className="fa fa-bars icon-left" aria-hidden="true"></i>Menu
           </Link>
           <Link className="button text is-mobile" onClick={this.hanleMenuMobileToggle.bind(this)}>
