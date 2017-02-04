@@ -18,3 +18,54 @@
   > .content
     flex: 1
     padding-top: $datatable-header-height
+
+    ol, ul
+      list-style: none
+      padding: 0
+      li
+        padding: $datatable-content-listitem-padding
+        &:nth-child(n+2)
+          border-top: $datatable-content-listitem-border
+        .item-title
+          a
+            display: flex
+            max-width: 100%
+            > .status, > .text
+              display: inline-block
+              vertical-align: top
+              &:nth-child(n+2)
+                margin-left: 5px
+
+            > .status
+              .label
+                border-radius: 4px
+                font-size: 0.7rem
+                font-weight: normal
+                padding: 1px 5px
+                &:nth-child(n+2)
+                  margin-left: 3px
+
+            > .text
+              flex: 1
+              overflow: hidden
+              text-overflow: ellipsis
+              white-space: nowrap
+              width: 1px
+
+        .item-sub
+          font-size: 0.8rem
+          margin-top: 5px
+          > .item
+            display: inline-block
+            &:nth-child(n+2)
+              margin-left: 10px
+            > .title
+              text-transform: lowercase
+              &::after
+                content: " : "
+            > .value
+              background: white
+              border: 0.5px solid #ED2F59
+              border-radius: 4px
+              color: #ED2F59
+              padding: 1px 5px
