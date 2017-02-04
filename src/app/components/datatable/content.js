@@ -15,7 +15,7 @@ class Item extends Component {
               <span className="label label-success">Publish</span>
               <span className="label label-warning">Waiting</span>
               <span className="label label-default">Draft</span>
-              <span className="label label-danger">Demoted</span>
+              <span className="label label-danger">Unpublish</span>
             </div>
             <div className="text">
               <span>{this.props.item.title}</span>
