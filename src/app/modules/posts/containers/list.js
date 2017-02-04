@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import Breadcrumb from '../../../components/breadcrumb'
 import DataTable from '../../../components/datatable'
 
 export default class List extends Component {
@@ -9,7 +10,10 @@ export default class List extends Component {
 
   render() {
     return (
-      <DataTable />
+      <div>
+        <Breadcrumb />
+        <DataTable />
+      </div>
     )
   }
 }

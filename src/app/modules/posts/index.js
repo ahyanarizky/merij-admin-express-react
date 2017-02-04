@@ -1,19 +1,15 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
-import Breadcrumb from '../../components/breadcrumb'
-import List from './list'
+import { Provider } from 'react-redux'
+import configureStore from './store'
+import Container from './containers'
+const store = configureStore()
 
-export default class Posts extends Component {
-  constructor(props) {
-    super(props)
-  }
-
+export default class Root extends Component {
   render() {
     return (
-      <div>
-        <Breadcrumb />
-        <List />
-      </div>
+      <Provider store={store}>
+        <Container />
+      </Provider>
     )
   }
 }
