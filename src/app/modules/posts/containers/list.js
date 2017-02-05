@@ -9,10 +9,12 @@ export default class List extends Component {
   }
 
   render() {
+    let list = this.props.data
+
     return (
       <div>
         <Breadcrumb />
-        <DataTable />
+        <DataTable data={list} />
       </div>
     )
   }

@@ -11,9 +11,11 @@ class App extends Component {
   }
 
   render() {
+    let list = this.props.contents
+
     return (
       <div>
-        <List />
+        <List data={list} />
       </div>
     )
   }
