@@ -10,10 +10,12 @@ export default class DataTable extends Component {
   }
 
   render() {
+    let content = this.props.data
+
     return (
       <div className="datatable">
         <Header />
-        <Content />
+        <Content data={content} />
       </div>
     )
   }

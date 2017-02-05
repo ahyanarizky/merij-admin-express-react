@@ -7,30 +7,32 @@ class Item extends Component {
   }
 
   render() {
+    let data = this.props.data
+    let statusClass = 'label label-'
+    statusClass += data.status.class
+    let detail = data.detail.map((item, i) => {
+      return (
+        <div key={i} className="item">
+          <span className="title">{item.title}</span>
+          <span className="value">{item.value}</span>
+        </div>
+      )
+    })
+
     return (
       <li>
         <div className="item-title">
           <Link>
             <div className="status">
-              <span className="label label-success">Publish</span>
-              <span className="label label-warning">Waiting</span>
-              <span className="label label-default">Draft</span>
-              <span className="label label-danger">Unpublish</span>
+              <span className={statusClass}>{data.status.text}</span>
             </div>
             <div className="text">
-              <span>{this.props.item.title}</span>
+              <span>{data.title}</span>
             </div>
           </Link>
         </div>
         <div className="item-sub">
-          <div className="item">
-            <span className="title">Channel</span>
-            <span className="value">merij</span>
-          </div>
-          <div className="item">
-            <span className="title">Views</span>
-            <span className="value">1000</span>
-          </div>
+          {detail}
         </div>
       </li>
     )
@@ -40,75 +42,11 @@ class Item extends Component {
 export default class Content extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      tempList: [{
-        'title': 'Post title #1',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #2',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #3',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #4',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #5',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #6',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #7',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #8',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #9',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }, {
-        'title': 'Post title #10',
-        'subitem': [{
-          'title': 'Channel',
-          'value': 'merij'
-        }]
-      }]
-    }
   }
 
   render() {
-    let list = this.state.tempList.map((item, i) => {
-      return <Item key={i} item={item} />
+    let list = this.props.data.map((item, i) => {
+      return <Item key={i} data={item} />
     })
 
     return (
