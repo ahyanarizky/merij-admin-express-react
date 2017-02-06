@@ -12,8 +12,11 @@ class StatusLabel extends Component {
 
   handleActiveToggle(e) {
     e.preventDefault()
+    let isActive = !this.state.isActive
+    this.setState({isActive: isActive})
 
-    this.setState({isActive: !this.state.isActive})
+    if(isActive) this.props.handleFilter(e, 'push', this.props.text)
+    else this.props.handleFilter(e, 'pop', this.props.text)
   }
 
   render() {
@@ -33,12 +36,34 @@ export default class Header extends Component {
     super(props)
 
     this.state = {
+      statusList: ['Publish', 'Waiting', 'Draft', 'Unpublish'],
+      statusActive: [],
       isHiddenOpen: false
     }
   }
 
+  handleFilter(e, status, text) {
+    status = status.toLowerCase()
+    let statusActive = this.state.statusActive
+
+    if(status === 'push') {
+      statusActive = [...statusActive, text]
+    } else if(status === 'pop') {
+      statusActive = statusActive.filter((item, i) => {
+        return item.toLowerCase() !== text.toLowerCase()
+      })
+    }
+
+    this.props.handleFilter(statusActive)
+    this.setState({statusActive: statusActive})
+  }
+
   handleOpenHidden(e) {
     this.setState({isHiddenOpen: !this.state.isHiddenOpen})
+  }
+
+  componentWillMount() {
+    this.setState({statusActive: this.state.statusList})
   }
 
   render() {
@@ -61,10 +86,10 @@ export default class Header extends Component {
               <span>status</span>
             </div>
             <div className="value">
-              <StatusLabel className="label label-success" text="Publish" />
-              <StatusLabel className="label label-warning" text="Waiting" />
-              <StatusLabel className="label label-default" text="Draft" />
-              <StatusLabel className="label label-danger" text="Unpublish" />
+              <StatusLabel className="label label-success" text="Publish" handleFilter={this.handleFilter.bind(this)} />
+              <StatusLabel className="label label-warning" text="Waiting" handleFilter={this.handleFilter.bind(this)} />
+              <StatusLabel className="label label-default" text="Draft" handleFilter={this.handleFilter.bind(this)} />
+              <StatusLabel className="label label-danger" text="Unpublish" handleFilter={this.handleFilter.bind(this)} />
             </div>
           </div>
         </div>

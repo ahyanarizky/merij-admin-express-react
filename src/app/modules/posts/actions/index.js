@@ -1,5 +1,9 @@
 import * as types from '../constants/actiontypes'
 
-export function fetchContent(page, offset){
-  return {type: types.FETCH_CONTENT, page, offset}
+export function fetchList(page, offset){
+  return {type: types.FETCH_LIST, page, offset}
+}
+
+export function filterList(status = []){
+  return {type: types.FILTER_LIST, status}
 }

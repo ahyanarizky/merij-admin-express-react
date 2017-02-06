@@ -11,24 +11,25 @@ class App extends Component {
   }
 
   render() {
-    let list = this.props.contents
+    let list = this.props.list
+    let actions = this.props.actions
 
     return (
-      <div>
-        <List data={list} />
-      </div>
+      <List
+        handleFilter={actions.filterList}
+        data={list} />
     )
   }
 }
 
 App.propTypes = {
-  contents: PropTypes.array.isRequired,
+  list: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){
   return {
-    contents: state.contents
+    list: state.list
   }
 }
 

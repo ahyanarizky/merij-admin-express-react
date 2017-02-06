@@ -46,7 +46,7 @@ export default class Content extends Component {
 
   render() {
     let list = this.props.data.map((item, i) => {
-      return <Item key={i} data={item} />
+      if(item.isShown) return <Item key={i} data={item} />
     })
 
     return (

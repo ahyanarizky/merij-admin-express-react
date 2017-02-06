@@ -14,7 +14,7 @@ export default class DataTable extends Component {
 
     return (
       <div className="datatable">
-        <Header />
+        <Header handleFilter={this.props.handleFilter} />
         <Content data={content} />
       </div>
     )

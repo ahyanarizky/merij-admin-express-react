@@ -1,1 +1,2 @@
-export const FETCH_CONTENT = 'FETCH_CONTENT'
+export const FETCH_LIST = 'FETCH_LIST'
+export const FILTER_LIST = 'FILTER_LIST'
