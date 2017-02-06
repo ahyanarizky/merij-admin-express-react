@@ -15,8 +15,9 @@ export default class List extends Component {
       <div>
         <Breadcrumb />
         <DataTable
+          configFilter={this.props.configFilter}
           handleFilter={this.props.handleFilter}
-          data={list} />
+          contentData={list} />
       </div>
     )
   }

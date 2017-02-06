@@ -15,17 +15,18 @@ class StatusLabel extends Component {
     let isActive = !this.state.isActive
     this.setState({isActive: isActive})
 
-    if(isActive) this.props.handleFilter(e, 'push', this.props.text)
-    else this.props.handleFilter(e, 'pop', this.props.text)
+    if(isActive) this.props.handleFilter(e, 'push', this.props.title)
+    else this.props.handleFilter(e, 'pop', this.props.title)
   }
 
   render() {
-    let className = this.props.className
+    let className = 'label label-'
+    className += this.props.className
     className += this.state.isActive ? '' : ' is-inactive'
 
     return (
       <Link className={className} onClick={this.handleActiveToggle.bind(this)}>
-        {this.props.text}
+        {this.props.title}
       </Link>
     )
   }
@@ -36,7 +37,6 @@ export default class Header extends Component {
     super(props)
 
     this.state = {
-      statusList: ['Publish', 'Waiting', 'Draft', 'Unpublish'],
       statusActive: [],
       isHiddenOpen: false
     }
@@ -63,12 +63,22 @@ export default class Header extends Component {
   }
 
   componentWillMount() {
-    this.setState({statusActive: this.state.statusList})
+    let filterStatus = this.props.configFilter.status.data
+    filterStatus = filterStatus.map((item, i) => {
+      return item.title
+    })
+    this.setState({statusActive: filterStatus})
   }
 
   render() {
+    let configFilter = this.props.configFilter
+    let filterStatus = configFilter.status
     let hiddenClass = 'hidden-wrapper'
     hiddenClass += this.state.isHiddenOpen ? ' is-open' : ''
+
+    let filterStatusValue = filterStatus.data.map((item, i) => {
+      return <StatusLabel key={i} title={item.title} className={item.class} handleFilter={this.handleFilter.bind(this)} />
+    })
 
     return (
       <div className="header">
@@ -83,13 +93,10 @@ export default class Header extends Component {
         <div className={hiddenClass}>
           <div className="item">
             <div className="title">
-              <span>status</span>
+              <span>{filterStatus.title}</span>
             </div>
             <div className="value">
-              <StatusLabel className="label label-success" text="Publish" handleFilter={this.handleFilter.bind(this)} />
-              <StatusLabel className="label label-warning" text="Waiting" handleFilter={this.handleFilter.bind(this)} />
-              <StatusLabel className="label label-default" text="Draft" handleFilter={this.handleFilter.bind(this)} />
-              <StatusLabel className="label label-danger" text="Unpublish" handleFilter={this.handleFilter.bind(this)} />
+              {filterStatusValue}
             </div>
           </div>
         </div>

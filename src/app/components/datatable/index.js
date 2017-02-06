@@ -10,11 +10,13 @@ export default class DataTable extends Component {
   }
 
   render() {
-    let content = this.props.data
+    let content = this.props.contentData
 
     return (
       <div className="datatable">
-        <Header handleFilter={this.props.handleFilter} />
+        <Header
+          configFilter={this.props.configFilter}
+          handleFilter={this.props.handleFilter} />
         <Content data={content} />
       </div>
     )
