@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import Breadcrumb from '../../../components/breadcrumb'
-import DataTable from '../../../components/datatable'
+import DataList from '../../../components/datalist'
 
 export default class List extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class List extends Component {
     return (
       <div>
         <Breadcrumb />
-        <DataTable
+        <DataList
           configSort={this.props.configSort}
           handleSort={this.props.handleSort}
           configFilter={this.props.configFilter}
