@@ -16,7 +16,17 @@ const initialState = {
         'class': 'danger'
       }]
     }
-  }
+  },
+  'sort': [{
+    'title': 'last updated',
+    'value': 'descending'
+  }, {
+    'title': 'title',
+    'value': null
+  }, {
+    'title': 'views',
+    'value': null
+  }]
 }
 
 export default function data(state = initialState, action){

@@ -15,6 +15,8 @@ export default class List extends Component {
       <div>
         <Breadcrumb />
         <DataTable
+          configSort={this.props.configSort}
+          handleSort={this.props.handleSort}
           configFilter={this.props.configFilter}
           handleFilter={this.props.handleFilter}
           contentData={list} />

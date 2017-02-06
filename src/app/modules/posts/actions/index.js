@@ -7,3 +7,7 @@ export function fetchList(page, offset) {
 export function filterList(status = []) {
   return {type: types.FILTER_LIST, status}
 }
+
+export function sortList(property = []) {
+  return {type: types.SORT_LIST, property}
+}

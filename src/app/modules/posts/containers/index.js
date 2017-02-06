@@ -17,6 +17,8 @@ class App extends Component {
 
     return (
       <List
+        configSort={config.sort}
+        handleSort={actions.sortList}
         configFilter={config.filter}
         handleFilter={actions.filterList}
         data={list} />

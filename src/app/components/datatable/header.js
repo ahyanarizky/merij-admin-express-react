@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-class StatusLabel extends Component {
+class FilterLabel extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      isActive: true
-    }
+    this.state = {isActive: true}
   }
 
   handleActiveToggle(e) {
@@ -32,13 +30,62 @@ class StatusLabel extends Component {
   }
 }
 
+class SortLabel extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {whichActive: null}
+  }
+
+  handleActiveToggle(type, e) {
+    e.preventDefault()
+
+    let whichActive = this.state.whichActive
+    if(whichActive) {
+      if(whichActive === type) {
+        this.setState({whichActive: null})
+        type = null
+      } else this.setState({whichActive: type})
+    } else this.setState({whichActive: type})
+
+    this.props.handleSort(e, this.props.title, type)
+  }
+
+  componentWillMount() {
+    this.setState({whichActive: this.props.active ? this.props.active.toLowerCase() : null})
+  }
+
+  render() {
+    let ascVal = 'ascending', descVal = 'descending'
+    let whichActive = this.state.whichActive
+    let classNameAsc, classNameDesc
+    classNameAsc = classNameDesc = 'label '
+    whichActive = whichActive ? whichActive.toLowerCase() : null
+    classNameAsc += (whichActive === ascVal) ? 'label-info' : 'is-inactive'
+    classNameDesc += (whichActive === descVal) ? 'label-info' : 'is-inactive'
+
+    return (
+      <div className="value">
+        <Link className={classNameAsc} onClick={this.handleActiveToggle.bind(this, ascVal)}>
+          Ascending
+        </Link>
+        <Link className={classNameDesc} onClick={this.handleActiveToggle.bind(this, descVal)}>
+          Descending
+        </Link>
+      </div>
+    )
+  }
+}
+
 export default class Header extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       statusActive: [],
-      isHiddenOpen: false
+      sortProperty: [],
+      isHiddenOpen: false,
+      latestHiddenOpen: null
     }
   }
 
@@ -58,47 +105,120 @@ export default class Header extends Component {
     this.setState({statusActive: statusActive})
   }
 
-  handleOpenHidden(e) {
-    this.setState({isHiddenOpen: !this.state.isHiddenOpen})
+  handleSort(e, title, value) {
+    let sortProperty = this.state.sortProperty
+
+    sortProperty = sortProperty.map((item, i) => {
+      if(item.title.toLowerCase() === title.toLowerCase()) item.value = value ? value.toLowerCase() : null
+      return item
+    })
+
+    this.props.handleSort(sortProperty)
+    this.setState({sortProperty: sortProperty})
+  }
+
+  handleOpenHidden(type, e) {
+    let isHiddenOpen = this.state.isHiddenOpen
+    let latestHiddenOpen = this.state.latestHiddenOpen
+
+    if(!isHiddenOpen) this.setState({isHiddenOpen: !isHiddenOpen, latestHiddenOpen: type})
+    else if(latestHiddenOpen === type) this.setState({isHiddenOpen: !isHiddenOpen, latestHiddenOpen: null})
+    else this.setState({latestHiddenOpen: type})
   }
 
   componentWillMount() {
-    let filterStatus = this.props.configFilter.status.data
-    filterStatus = filterStatus.map((item, i) => {
-      return item.title
-    })
-    this.setState({statusActive: filterStatus})
+    let configFilter = this.props.configFilter
+    let handleFilter = this.props.handleFilter
+
+    if(configFilter && handleFilter) {
+      let filterStatus = configFilter.status.data
+      filterStatus = filterStatus.map((item, i) => {
+        return item.title
+      })
+      this.setState({statusActive: filterStatus})
+    }
+
+    let configSort = this.props.configSort
+    let handleSort = this.props.handleSort
+    if(configSort && handleSort) {
+      this.setState({sortProperty: configSort})
+    }
   }
 
   render() {
-    let configFilter = this.props.configFilter
-    let filterStatus = configFilter.status
     let hiddenClass = 'hidden-wrapper'
     hiddenClass += this.state.isHiddenOpen ? ' is-open' : ''
 
-    let filterStatusValue = filterStatus.data.map((item, i) => {
-      return <StatusLabel key={i} title={item.title} className={item.class} handleFilter={this.handleFilter.bind(this)} />
-    })
+    // Filter feature property
+    let configFilter = this.props.configFilter
+    let handleFilter = this.props.handleFilter
 
-    return (
-      <div className="header">
-        <Link className="btn btn-xs btn-info" onClick={this.handleOpenHidden.bind(this)}>
+    let filterButton, filterWrapper = null
+    if(configFilter && handleFilter) {
+      let filterStatus = configFilter.status
+      let filterStatusValue = filterStatus.data.map((item, i) => {
+        return <FilterLabel key={i} title={item.title} className={item.class} handleFilter={this.handleFilter.bind(this)} />
+      })
+
+      filterButton = (
+        <Link className="btn btn-xs btn-info" onClick={this.handleOpenHidden.bind(this, 'filter')}>
           <i className="icon fa fa-filter" aria-hidden="true"></i>
           <span className="text">Filter</span>
         </Link>
+      )
+
+      filterWrapper = (
+        <div className="item">
+          <div className="title">
+            <span>{filterStatus.title}</span>
+          </div>
+          <div className="value">
+            {filterStatusValue}
+          </div>
+        </div>
+      )
+    }
+
+    // Sort feature property
+    let configSort = this.props.configSort
+    let handleSort = this.props.handleSort
+
+    let sortButton, sortWrapper = null
+    if(configSort && handleSort) {
+      sortButton = (
+        <Link className="btn btn-xs btn-info" onClick={this.handleOpenHidden.bind(this, 'sort')}>
+          <i className="icon fa fa-sort" aria-hidden="true"></i>
+          <span className="text">Sort</span>
+        </Link>
+      )
+
+      sortWrapper = configSort.map((item, i) => {
+        return (
+          <div key={i} className="item">
+            <div className="title">
+              <span>{item.title}</span>
+            </div>
+            <SortLabel title={item.title} active={item.value} handleSort={this.handleSort.bind(this)} />
+          </div>
+        )
+      })
+    }
+
+    // Hidden wrapper property
+    let hiddenWrapper = null
+    if(this.state.latestHiddenOpen === 'filter') hiddenWrapper = filterWrapper
+    else if(this.state.latestHiddenOpen === 'sort') hiddenWrapper = sortWrapper
+
+    return (
+      <div className="header">
+        {filterButton}
+        {sortButton}
         <Link className="btn btn-xs btn-success">
           <i className="icon fa fa-plus" aria-hidden="true"></i>
           <span className="text">Add New</span>
         </Link>
         <div className={hiddenClass}>
-          <div className="item">
-            <div className="title">
-              <span>{filterStatus.title}</span>
-            </div>
-            <div className="value">
-              {filterStatusValue}
-            </div>
-          </div>
+          {hiddenWrapper}
         </div>
       </div>
     )

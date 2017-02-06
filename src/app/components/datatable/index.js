@@ -15,6 +15,8 @@ export default class DataTable extends Component {
     return (
       <div className="datatable">
         <Header
+          configSort={this.props.configSort}
+          handleSort={this.props.handleSort}
           configFilter={this.props.configFilter}
           handleFilter={this.props.handleFilter} />
         <Content data={content} />
