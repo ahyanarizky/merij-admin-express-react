@@ -4,6 +4,10 @@ export function fetchList(page, offset) {
   return {type: types.FETCH_LIST, page, offset}
 }
 
+export function searchList(value) {
+  return {type: types.SEARCH_LIST, value}
+}
+
 export function filterList(status = []) {
   return {type: types.FILTER_LIST, status}
 }

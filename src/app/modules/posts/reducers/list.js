@@ -1,4 +1,4 @@
-import { FETCH_LIST, FILTER_LIST, SORT_LIST } from '../constants/actiontypes'
+import { FETCH_LIST, SEARCH_LIST, FILTER_LIST, SORT_LIST } from '../constants/actiontypes'
 
 const initialState = [
   {
@@ -97,6 +97,19 @@ const initialState = [
 export default function data(state = initialState, action){
   switch (action.type) {
     case FETCH_LIST:
+      return state
+    case SEARCH_LIST:
+      state = state.map((item, i) => {
+        let title = item.title
+
+        item.isFound = false
+        if(title && item.isShown) {
+          title = title.toLowerCase()
+          if(title.search(action.value.toLowerCase()) >= 0) item.isFound = true
+        }
+        return item
+      })
+
       return state
     case FILTER_LIST:
       state = state.map((item, i) => {

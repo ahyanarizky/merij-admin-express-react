@@ -15,10 +15,11 @@ export default class List extends Component {
       <div>
         <Breadcrumb />
         <DataList
-          configSort={this.props.configSort}
-          handleSort={this.props.handleSort}
+          handleSearch={this.props.handleSearch}
           configFilter={this.props.configFilter}
           handleFilter={this.props.handleFilter}
+          configSort={this.props.configSort}
+          handleSort={this.props.handleSort}
           contentData={list} />
       </div>
     )

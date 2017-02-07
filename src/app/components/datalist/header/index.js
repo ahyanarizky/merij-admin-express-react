@@ -89,6 +89,14 @@ export default class Header extends Component {
     }
   }
 
+  handleSearch(e) {
+    e.preventDefault()
+
+    let refs = this.refs
+    let search = refs.search.value.trim()
+    this.props.handleSearch(search)
+  }
+
   handleFilter(e, status, text) {
     status = status.toLowerCase()
     let statusActive = this.state.statusActive
@@ -147,7 +155,33 @@ export default class Header extends Component {
 
   render() {
     let hiddenClass = 'hidden-wrapper'
-    hiddenClass += this.state.isHiddenOpen ? ' is-open' : ''
+    hiddenClass += (this.state.isHiddenOpen && this.state.latestHiddenOpen) ? ' is-open' : ''
+
+    // Sort feature property
+    let configSearch = this.props.configSearch
+    let handleSearch = this.props.handleSearch
+
+    let searchButton, searchWrapper = null
+    if((configSearch && handleSearch) || true) {
+      searchButton = (
+        <Link className="btn btn-xs btn-primary" onClick={this.handleOpenHidden.bind(this, 'search')}>
+          <i className="icon fa fa-search" aria-hidden="true"></i>
+          <span className="text">Search</span>
+        </Link>
+      )
+
+      searchWrapper = (
+        <form className="form">
+          <div className="input-group">
+            <span className="input-group-addon with-button" onClick={this.handleOpenHidden.bind(this, null)}><i className="fa fa-close"></i></span>
+            <input ref="search" type="text" value={configSearch.value}
+              className="form-control input-block input-sm input-default" placeholder="Search"
+              onChange={this.handleSearch.bind(this)} />
+            <span className="input-group-addon with-button"><i className="fa fa-search"></i></span>
+          </div>
+        </form>
+      )
+    }
 
     // Filter feature property
     let configFilter = this.props.configFilter
@@ -195,9 +229,7 @@ export default class Header extends Component {
       sortWrapper = configSort.map((item, i) => {
         return (
           <div key={i} className="item">
-            <div className="title">
-              <span>{item.title}</span>
-            </div>
+            <div className="title"><span>{item.title}</span></div>
             <SortLabel title={item.title} active={item.value} handleSort={this.handleSort.bind(this)} />
           </div>
         )
@@ -209,8 +241,12 @@ export default class Header extends Component {
     if(this.state.latestHiddenOpen === 'filter') hiddenWrapper = filterWrapper
     else if(this.state.latestHiddenOpen === 'sort') hiddenWrapper = sortWrapper
 
-    return (
-      <div className="header">
+    // Header wrapper property
+    let headerWrapper = null
+    if(this.state.latestHiddenOpen === 'search') headerWrapper = searchWrapper
+    else headerWrapper = (
+      <div>
+        {searchButton}
         {filterButton}
         {sortButton}
         <Link className="btn btn-xs btn-success">
@@ -220,6 +256,12 @@ export default class Header extends Component {
         <div className={hiddenClass}>
           {hiddenWrapper}
         </div>
+      </div>
+    )
+
+    return (
+      <div className="header">
+        { headerWrapper }
       </div>
     )
   }

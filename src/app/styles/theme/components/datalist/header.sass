@@ -1,0 +1,45 @@
+.datatable > .header
+  align-items: center
+  background: $datatable-header-bg
+  border-bottom: $datatable-header-border
+  display: flex
+  padding: $datatable-header-padding
+  height: $datatable-header-height
+
+  .hidden-wrapper
+    background: $datatable-header-hidden-wrapper-bg
+    display: none
+    padding: $datatable-header-hidden-wrapper-padding
+    position: absolute
+    top: $datatable-header-height
+    left: 0px
+    width: 100%
+    &.is-open
+      border-bottom: $datatable-header-border
+      display: block
+
+    .item
+      > .title, > .value
+        display: inline-block
+        font-size: 0.8rem
+        vertical-align: middle
+
+      > .title
+        text-transform: lowercase
+        &::after
+          content: " : "
+        & + .value
+          margin-left: 5px
+
+      > .value
+        a
+          +no-select
+        .label
+          text-transform: capitalize
+          &.is-inactive
+            background: $datatable-header-hidden-wrapper-label-inactive-bg
+            color: $datatable-header-hidden-wrapper-label-inactive-color
+
+  .btn
+    &:nth-child(n+2)
+      margin-left: 5px

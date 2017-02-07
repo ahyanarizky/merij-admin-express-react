@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-class Item extends Component {
+export default class Item extends Component {
   constructor(props) {
     super(props)
   }
@@ -35,24 +35,6 @@ class Item extends Component {
           {detail}
         </div>
       </li>
-    )
-  }
-}
-
-export default class Content extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    let list = this.props.data.map((item, i) => {
-      if(item.isShown) return <Item key={i} data={item} />
-    })
-
-    return (
-      <div className="content">
-        <ol>{ list }</ol>
-      </div>
     )
   }
 }

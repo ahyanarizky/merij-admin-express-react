@@ -8,7 +8,9 @@ form
   border-radius: $input-border-radius
   box-shadow: none !important
   outline: none !important
-  &:focus
+  &.input-default:focus
+    border-color: $input-border-color
+  &:not(.input-default):focus
     border-color: $input-focus-border-color
 
 .form-group
@@ -22,7 +24,7 @@ form
 
 .input-group
   .form-control
-    &:focus
+    &:not(.input-default):focus
       + .input-group-addon
         border-color: $input-focus-border-color
     &:first-child
@@ -38,6 +40,7 @@ form
       padding-right: 0px
   .input-group-addon
     background: $input-bg
+    border-color: $input-border-color
     &.with-button
       cursor: pointer
       &[disabled]

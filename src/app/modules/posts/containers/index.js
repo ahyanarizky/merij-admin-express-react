@@ -17,10 +17,11 @@ class App extends Component {
 
     return (
       <List
-        configSort={config.sort}
-        handleSort={actions.sortList}
+        handleSearch={actions.searchList}
         configFilter={config.filter}
         handleFilter={actions.filterList}
+        configSort={config.sort}
+        handleSort={actions.sortList}
         data={list} />
     )
   }
