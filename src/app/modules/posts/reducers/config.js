@@ -1,22 +1,24 @@
 const initialState = {
-  'filter': {
-    'status': {
-      'title': 'status',
-      'data': [{
-        'title': 'Publish',
-        'class': 'success'
-      }, {
-        'title': 'Waiting',
-        'class': 'warning'
-      }, {
-        'title': 'Draft',
-        'class': 'default'
-      }, {
-        'title': 'Unpublish',
-        'class': 'danger'
-      }]
-    }
-  },
+  'filter': [{
+    'title': 'status',
+    'value': [{
+      'title': 'Publish',
+      'class': 'success',
+      'active': true
+    }, {
+      'title': 'Waiting',
+      'class': 'warning',
+      'active': true
+    }, {
+      'title': 'Draft',
+      'class': 'default',
+      'active': true
+    }, {
+      'title': 'Unpublish',
+      'class': 'danger',
+      'active': true
+    }]
+  }],
   'sort': [{
     'title': 'last updated',
     'value': 'descending'

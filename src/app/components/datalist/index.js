@@ -9,30 +9,78 @@ export default class DataTable extends Component {
     super(props)
 
     this.state = {
-      isSearch: false,
-      searchValue: ''
+      search: {
+        isSearch: false,
+        value: ''
+      },
+      filter: {value: []},
+      sort: {value: []}
     }
   }
 
   handleSearch(value) {
-    if(value) this.setState({isSearch: true, searchValue: value})
-    else this.setState({isSearch: false, searchValue: ''})
+    if(value) this.setState({search: {isSearch: true, value: value}})
+    else this.setState({search: {isSearch: false, value: ''}})
     this.props.handleSearch(value)
+  }
+
+  handleFilter(title, valueTitle, valueActive) {
+    let filter = this.state.filter.value
+
+    filter = filter.map((item, i) => {
+      if(item.title.toLowerCase() === title.toLowerCase()) {
+        item.value = item.value.map((value, x) => {
+          if(value.title.toLowerCase() === valueTitle.toLowerCase()) value.active = valueActive
+          return value
+        })
+      }
+      return item
+    })
+
+    this.props.handleFilter(filter)
+    this.setState({filter: {value: filter}})
+  }
+
+  handleSort(title, value) {
+    let sort = this.state.sort.value
+
+    sort = sort.map((item, i) => {
+      if(item.title.toLowerCase() === title.toLowerCase()) item.value = value ? value.toLowerCase() : null
+      return item
+    })
+
+    this.props.handleSort(sort)
+    this.setState({sort: {value: sort}})
+  }
+
+  componentWillMount() {
+    let configFilter = this.props.configFilter
+    let handleFilter = this.props.handleFilter
+
+    if(configFilter && handleFilter) {
+      this.setState({filter: {value: configFilter}})
+    }
+
+    let configSort = this.props.configSort
+    let handleSort = this.props.handleSort
+    if(configSort && handleSort) {
+      this.setState({sort: {value: configSort}})
+    }
   }
 
   render() {
     let content = this.props.contentData
 
     return (
-      <div className="datatable">
+      <div className="datalist">
         <Header
-          configSearch={{value: this.state.searchValue}}
+          configSearch={{value: this.state.search.value}}
           handleSearch={this.handleSearch.bind(this)}
-          configFilter={this.props.configFilter}
-          handleFilter={this.props.handleFilter}
-          configSort={this.props.configSort}
-          handleSort={this.props.handleSort} />
-        <Content isSearch={this.state.isSearch} searchValue={this.state.searchValue} data={content} />
+          configFilter={this.state.filter.value}
+          handleFilter={this.handleFilter.bind(this)}
+          configSort={this.state.sort.value}
+          handleSort={this.handleSort.bind(this)} />
+        <Content search={this.state.search} data={content} />
       </div>
     )
   }

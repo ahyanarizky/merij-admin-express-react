@@ -112,16 +112,26 @@ export default function data(state = initialState, action){
 
       return state
     case FILTER_LIST:
+      let filterProperty = action.property
+      let filterStatus = ['status']
+
       state = state.map((item, i) => {
         item.isShown = false
-        for(let idx = 0; idx < action.status.length; idx++) {
-          if(item.status.text.toLowerCase() === action.status[idx].toLowerCase()) {
-            item.isShown = true
-            break
-          }
-        }
         return item
       })
+
+      for(let idx = 0; idx < filterProperty.length; idx++) {
+        state = state.map((item, i) => {
+          if(filterProperty[idx].title === filterStatus[0]) {
+            let propValue = filterProperty[idx].value
+            for(let idy = 0; idy < propValue.length; idy++) {
+              if(item.status.text.toLowerCase() === propValue[idy].title.toLowerCase() && propValue[idy].active)
+                item.isShown = true
+            }
+          }
+          return item
+        })
+      }
       return state
     case SORT_LIST:
       let sortProperty = action.property

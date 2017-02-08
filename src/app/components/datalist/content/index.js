@@ -8,11 +8,10 @@ export default class Content extends Component {
   }
 
   render() {
-    let isSearch = this.props.isSearch
-    let searchValue = this.props.searchValue
+    let searchProp = this.props.search
     let itemShown = 0
     let list = this.props.data.map((item, i) => {
-      if(isSearch) {
+      if(searchProp.isSearch) {
         if(item.isShown && item.isFound) {
           itemShown += 1
           return <Item key={i} data={item} />
@@ -25,7 +24,7 @@ export default class Content extends Component {
 
     return (
       <div className="content">
-        <Feedback isSearch={isSearch} searchValue={searchValue} itemShown={itemShown} />
+        <Feedback search={searchProp} itemShown={itemShown} />
         <ol>{ list }</ol>
       </div>
     )

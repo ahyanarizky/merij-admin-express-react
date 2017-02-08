@@ -142,17 +142,17 @@ section.lyt-dashboard
     +transition(margin linear 0.1s)
     +bp-medium
       margin-left: 0px !important
-      .breadcrumb, .datatable > .header
+      .breadcrumb, .datalist > .header
         left: 0px !important
         width: 100% !important
     &.is-expand
       margin-left: 0px
-      .breadcrumb, .datatable > .header
+      .breadcrumb, .datalist > .header
         left: 0px
         width: 100%
 
     // Component style
-    .breadcrumb, .datatable > .header
+    .breadcrumb, .datalist > .header
       position: fixed
       top: $lyt-dashboard-header-height
       left: $lyt-dashboard-menu-width
@@ -161,11 +161,11 @@ section.lyt-dashboard
       +transition(left linear 0.1s, width linear 0.1s)
 
     .breadcrumb
-      + .datatable
+      + .datalist
         > .header
           +calc(top, ($lyt-dashboard-header-height + ' + ' + $breadcrumb-height))
         > .content
-          +calc(padding-top, ($datatable-header-height + ' + ' + $breadcrumb-height))
+          +calc(padding-top, ($datalist-header-height + ' + ' + $breadcrumb-height))
 
   > .copyright-wrapper
     // Layout style

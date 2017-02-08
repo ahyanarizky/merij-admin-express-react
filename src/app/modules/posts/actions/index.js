@@ -8,8 +8,8 @@ export function searchList(value) {
   return {type: types.SEARCH_LIST, value}
 }
 
-export function filterList(status = []) {
-  return {type: types.FILTER_LIST, status}
+export function filterList(property = []) {
+  return {type: types.FILTER_LIST, property}
 }
 
 export function sortList(property = []) {

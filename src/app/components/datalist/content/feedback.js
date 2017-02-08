@@ -6,9 +6,10 @@ export default class Feedback extends Component {
   }
 
   render() {
-    let isSearch = this.props.isSearch
+    let searchProp = this.props.search
+    let isSearch = searchProp.isSearch
     let searchText = null
-    let searchValue = this.props.searchValue
+    let searchValue = searchProp.value
     let itemShown = this.props.itemShown
 
     if(!isSearch) return null
