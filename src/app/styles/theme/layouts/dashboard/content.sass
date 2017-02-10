@@ -1,0 +1,40 @@
+section.lyt-dashboard > .content-wrapper
+  // Layout style
+  flex: 1
+  margin-top: $lyt-dashboard-header-height
+  margin-left: $lyt-dashboard-menu-width
+  position: relative
+  +transition(margin linear 0.1s)
+  +bp-medium
+    margin-left: 0px !important
+    .breadcrumb, .datalist > .header
+      left: 0px !important
+      width: 100% !important
+  &.is-expand
+    margin-left: 0px
+    .breadcrumb, .datalist > .header
+      left: 0px
+      width: 100%
+
+  // Component style
+  .breadcrumb, .datalist > .header
+    position: fixed
+    top: $lyt-dashboard-header-height
+    left: $lyt-dashboard-menu-width
+    z-index: 1
+    +calc(width, ('100% - ' + $lyt-dashboard-menu-width))
+    +transition(left linear 0.1s, width linear 0.1s)
+
+  .breadcrumb
+    z-index: 3
+    + .datalist
+      > .header
+        +calc(top, ($lyt-dashboard-header-height + ' + ' + $breadcrumb-height))
+      > .content
+        +calc(padding-top, ($datalist-header-height + ' + ' + $breadcrumb-height))
+
+    + .content
+      padding-top: $breadcrumb-height
+      &.with-max-width
+        margin: 0px auto
+        max-width: 800px

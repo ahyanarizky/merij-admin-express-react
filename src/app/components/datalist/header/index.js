@@ -62,6 +62,15 @@ export default class Header extends Component {
       })
     }
 
+    // Add feature property
+    let configAdd = this.props.configAdd
+    let addPath = configAdd.path
+
+    let addButton = null
+    if(addPath) {
+      addButton = <Button link={addPath} class="success" icon="plus" text="Add New" />
+    }
+
     // Hidden wrapper property
     let hiddenWrapper = null
     if(this.state.latestHiddenOpen === 'filter') hiddenWrapper = filterWrapper
@@ -75,10 +84,7 @@ export default class Header extends Component {
         {searchButton}
         {filterButton}
         {sortButton}
-        <Link className="btn btn-xs btn-success">
-          <i className="icon fa fa-plus" aria-hidden="true"></i>
-          <span className="text">Add New</span>
-        </Link>
+        {addButton}
         <div className={hiddenClass}>{ hiddenWrapper }</div>
       </div>
     )

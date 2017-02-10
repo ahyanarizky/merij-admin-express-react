@@ -9,7 +9,9 @@ export default class DataTable extends Component {
     super(props)
 
     this.state = {
-      search: {
+      add: {
+        path: null
+      }, search: {
         isSearch: false,
         value: ''
       },
@@ -54,6 +56,10 @@ export default class DataTable extends Component {
   }
 
   componentWillMount() {
+    let configAdd = this.props.configAdd
+
+    if(configAdd) this.setState({add: {path: configAdd}})
+
     let configFilter = this.props.configFilter
     let handleFilter = this.props.handleFilter
 
@@ -74,6 +80,7 @@ export default class DataTable extends Component {
     return (
       <div className="datalist">
         <Header
+          configAdd={this.state.add}
           configSearch={{value: this.state.search.value}}
           handleSearch={this.handleSearch.bind(this)}
           configFilter={this.state.filter.value}

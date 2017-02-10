@@ -6,12 +6,14 @@ ol.breadcrumb
   margin: 0px
   padding: $breadcrumb-padding
   height: $breadcrumb-height
-  li
+  > li
     &.active
       color: $breadcrumb-link-active-text
       span
         background: $breadcrumb-link-active-bg
         border-radius: 4px
         padding: 3px 10px
+    & + li:before
+      color: $breadcrumb-link
   a
     color: $breadcrumb-link

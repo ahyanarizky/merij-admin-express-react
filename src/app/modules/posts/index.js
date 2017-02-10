@@ -8,7 +8,7 @@ export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Container />
+        <Container status={this.props.route.status} />
       </Provider>
     )
   }

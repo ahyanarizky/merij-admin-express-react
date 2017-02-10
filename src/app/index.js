@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { browserHistory, Link, Route, Router } from 'react-router'
+import { browserHistory, Link, Route, Router, RouteHandler } from 'react-router'
 import ReactDOM from 'react-dom'
 import LayoutPlain from './layouts/plain'
 import LayoutDashboard from './layouts/dashboard'
@@ -20,14 +20,15 @@ class App extends Component {
     return (
       <Router history={browserHistory}>
         <Route path={'/dashboard'} component={LayoutDashboard}>
-          <Route path={'/dashboard/welcome'} title='welcome' component={Dashboard} />
-          <Route path={'/dashboard/ads'} title='ads' component={Ads} />
-          <Route path={'/dashboard/officers'} title='officers' component={Officers} />
-          <Route path={'/dashboard/channels'} title='channels' component={Channels} />
-          <Route path={'/dashboard/posts'} title='posts' component={Posts} />
-          <Route path={'/dashboard/users'} title='users' component={Users} />
-          <Route path={'/dashboard/profile'} title='profile' component={Profile} />
-          <Route path={'*'} title='404 Not found' component={Notfound} />
+          <Route path={'/dashboard/welcome'} title="welcome" component={Dashboard} />
+          <Route path={'/dashboard/ads'} title="ads" component={Ads} />
+          <Route path={'/dashboard/officers'} title="officers" component={Officers} />
+          <Route path={'/dashboard/channels'} title="channels" component={Channels} />
+          <Route path={'/dashboard/posts'} title="posts" status="L" component={Posts} />
+          <Route path={'/dashboard/posts/add'} title="add posts" status="A" component={Posts} />
+          <Route path={'/dashboard/users'} title="users" component={Users} />
+          <Route path={'/dashboard/profile'} title="profile" component={Profile} />
+          <Route path={'*'} title="404 Not found" component={Notfound} />
         </Route>
         <Route component={LayoutPlain}>
           <Route path={'/'} component={Signin} />

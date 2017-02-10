@@ -1,0 +1,62 @@
+section.lyt-dashboard > .menu-wrapper
+  // Layout style
+  background: $lyt-dashboard-menu-bg
+  border-right: $lyt-dashboard-border
+  margin-top: $lyt-dashboard-header-height
+  overflow-y: scroll
+  z-index: 100
+  +calc(height, ('100vh - ' + $lyt-dashboard-header-height))
+  &:not(.is-mobile)
+    position: fixed
+    left: 0px
+    width: $lyt-dashboard-menu-width
+    +transition(margin linear 0.1s)
+    &.is-close
+      margin-left: -$lyt-dashboard-menu-width
+  &.is-mobile
+    display: none
+    margin-left: -100vw
+    position: absolute
+    width: 100vw
+  +bp-medium
+    &:not(.is-mobile)
+      display: none
+    &.is-mobile
+      display: block
+      &.is-open
+        margin-left: 0
+
+  // Component style
+  ul
+    list-style: none
+    margin: 0px
+    padding: 0px
+    li
+      &:nth-child(n+2)
+        border-top: $lyt-dashboard-border
+      a
+        display: block
+        padding: 15px 20px
+        position: relative
+        text-decoration: none
+        &:after
+          content: ""
+          background: $lyt-dashboard-menu-bullet
+          border-radius: 100%
+          margin: auto 0px
+          opacity: 0
+          position: absolute
+          top: 0px
+          bottom: 0px
+          right: 5px
+          width: 10px
+          height: 10px
+          +transition(opacity ease-in 0.1s, right ease-in 0.1s)
+        &.active:after, &:hover:after, &:focus:after
+          opacity: 1
+          right: 10px
+        .icon
+          text-align: center
+          width: 24px
+          + .text
+            margin-left: 10px

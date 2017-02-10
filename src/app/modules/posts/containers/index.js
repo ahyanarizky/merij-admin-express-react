@@ -3,7 +3,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import * as AppActions from '../actions'
+import Breadcrumb from '../../../components/breadcrumb'
 import List from './list'
+import Add from './add'
 
 class App extends Component {
   constructor(props) {
@@ -11,18 +13,46 @@ class App extends Component {
   }
 
   render() {
-    let config = this.props.config
-    let list = this.props.list
-    let actions = this.props.actions
+    let status = this.props.status
+    let breadcrumbList = []
+    let content = null
+
+    if(status === 'L') {
+      let config = this.props.config
+      let list = this.props.list
+      let actions = this.props.actions
+
+      breadcrumbList = [{
+        'title': 'List',
+        'path': null
+      }]
+
+      content = (
+        <List
+          handleSearch={actions.searchList}
+          configFilter={config.filter}
+          handleFilter={actions.filterList}
+          configSort={config.sort}
+          handleSort={actions.sortList}
+          data={list} />
+      )
+    } else if(status === 'A') {
+      breadcrumbList = [{
+        'title': 'List',
+        'path': '/dashboard/posts'
+      }, {
+        'title': 'Add Post',
+        'path': null
+      }]
+
+      content = <Add />
+    }
 
     return (
-      <List
-        handleSearch={actions.searchList}
-        configFilter={config.filter}
-        handleFilter={actions.filterList}
-        configSort={config.sort}
-        handleSort={actions.sortList}
-        data={list} />
+      <div>
+        <Breadcrumb list={breadcrumbList} />
+        { content }
+      </div>
     )
   }
 }

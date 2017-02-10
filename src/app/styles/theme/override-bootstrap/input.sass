@@ -25,7 +25,7 @@ form
 .input-group
   .form-control
     &:not(.input-default):focus
-      + .input-group-addon
+      + .input-group-addon, + .input-group-button
         border-color: $input-focus-border-color
     &:first-child
       border-right: 0px
@@ -38,6 +38,7 @@ form
       padding-left: 0px
       border-right: 0px
       padding-right: 0px
+
   .input-group-addon
     background: $input-bg
     border-color: $input-border-color
@@ -46,6 +47,10 @@ form
       &[disabled]
         background: $input-disabled-bg
         cursor: not-allowed
+
+  .input-group-btn:last-child
+    > .btn, > .btn-group
+      margin: 0px
 
 .form-control, .input-group-addon
   +transition(all ease-in 0.1s)

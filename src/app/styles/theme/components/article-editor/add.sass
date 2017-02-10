@@ -1,0 +1,25 @@
+.article-editor .component-add
+  padding: 10px 0px
+  text-align: center
+
+  > .title, > .action
+    display: block
+
+  > .title
+    opacity: 0.4
+    +no-select
+
+  > .action
+    margin-top: 10px
+
+  a
+    align-items: center
+    display: inline-flex
+    justify-content: center
+    text-decoration: none
+    +no-select
+    &:nth-child(n+2)
+      margin-left: 25px
+
+    .icon
+      margin-right: 5px
